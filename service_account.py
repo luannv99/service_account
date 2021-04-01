@@ -52,6 +52,9 @@ def create_account(account: ACC):
             mydb.close()
             print("MySQL mydb is closed")
     return {}
+
+
+
 @app.post("/login/account")
 async def login_account(acc: ACC):
     try:
@@ -82,6 +85,9 @@ async def login_account(acc: ACC):
             cursor.close()
             mydb.close()
             print("MySQL mydb is closed")
+            
+            
+            
 @app.post("/update/account")
 async def update_account(account: ACC):
     try:
@@ -106,6 +112,9 @@ async def update_account(account: ACC):
             cursor.close()
             mydb.close()
             print("Mysql mydb is close")
+            
+            
+            
 @app.post("/delete/account")
 async def delete_account(account : ACC):
     try:
