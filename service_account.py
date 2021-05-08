@@ -24,7 +24,7 @@ def create_account(account: ACC):
         cursor = mydb.cursor(dictionary=True) # connect sql
         parse_data = account.dict()
         print(parse_data)
-        if (parse_data.get("phone") is None or parse_data.get("phone") == "") and (parse_data.get("password") is None or parse_data.get("password") == "") and (parse_data.get("email") is None or parse_data.get("email") == ""):
+        if (parse_data.get("phone") is None or parse_data.get("phone") == "") or (parse_data.get("password") is None or parse_data.get("password") == "") or (parse_data.get("email") is None or parse_data.get("email") == ""):
             print("phone null")
             raise HTTPException(status_code=400, detail="missing param")
         mysql_query = "SELECT phone FROM users WHERE phone = %s"
@@ -60,7 +60,7 @@ async def login_account(acc: ACC):
     try:
         cursor = mydb.cursor(dictionary=True)
         parse_data = acc.dict()
-        if (parse_data.get("phone") is None or parse_data.get("phone") == "") and (parse_data.get("password") is None or parse_data.get("password") == "") and (parse_data.get("email") is None or parse_data.get("email") == ""):
+        if (parse_data.get("phone") is None or parse_data.get("phone") == "") or (parse_data.get("password") is None or parse_data.get("password") == "") or (parse_data.get("email") is None or parse_data.get("email") == ""):
             print("username null")
             raise HTTPException(status_code=400, detail="missing param")
         # kiem tra user phone va password co ton tai trong he thong khong neu khong ghi ra "user hoac password khong dung"
@@ -93,7 +93,7 @@ async def update_account(account: ACC):
     try:
         cursor = mydb.cursor(dictionary = True)
         parse_data = account.dict()
-        if (parse_data.get("phone") is None or parse_data.get("phone") == "") and (parse_data.get("email") is None or parse_data.get("email") == "") and (parse_data.get("password") is None or parse_data.get("password") == ""):
+        if (parse_data.get("phone") is None or parse_data.get("phone") == "") or (parse_data.get("email") is None or parse_data.get("email") == "") or (parse_data.get("password") is None or parse_data.get("password") == ""):
             raise HTTPException(status_code = 400, detail = "missing param")
         mysql_update_mail = "UPDATE service_account.users SET email = %s WHERE phone = %s"
         input_mail_update = parse_data.get('email')
@@ -120,7 +120,7 @@ async def delete_account(account : ACC):
     try:
         cursor = mydb.cursor(dictionary=True)
         parse_data = account.dict()
-        if (parse_data.get("phone") is None or parse_data.get("phone") == "") and (parse_data.get("email") is None or parse_data.get("email") == "") and (parse_data.get("password") is None or parse_data.get("password") == ""):
+        if (parse_data.get("phone") is None or parse_data.get("phone") == "") or (parse_data.get("email") is None or parse_data.get("email") == "") or (parse_data.get("password") is None or parse_data.get("password") == ""):
             raise HTTPException(status_code = 400, detail = "missing param")
         mydb_delete_account = "DELETE FROM users WHERE phone = %s"
         data_phone = (parse_data.get('phone'),)
