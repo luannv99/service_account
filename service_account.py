@@ -32,7 +32,7 @@ def create_account(account: ACC):
         cursor.execute(mysql_query, params_tupple)
         record = cursor.fetchone()
         if record is not None:
-            raise HTTPException(status_code=400, detail="user does  existed in system")
+            raise HTTPException(status_code=400, detail="user existed in system")
         data_password = parse_data.get("password")
         print(data_password)
         password = str.encode(data_password) #chuyen string thanh byte
